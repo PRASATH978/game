@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-lg rounded-lg p-6 max-w-md w-full">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Game Result</h1>
+        <p class="text-gray-700 mb-2">Your Bet: <strong class="font-semibold">{{ bet }}</strong></p>
+        <div class="flex justify-between items-center mb-4">
+            <div class="text-center">
+                <p class="text-gray-700 mb-2">Dragon Card:</p>
+                <img src="{{ dragon_card_image_url }}" alt="Dragon Card" class="w-24 h-36 mx-auto">
+                <p class="font-semibold text-gray-800">{{ dragon_card }}</p>
+            </div>
+            <div class="text-center">
+                <p class="text-gray-700 mb-2">Tiger Card:</p>
+                <img src="{{ tiger_card_image_url }}" alt="Tiger Card" class="w-24 h-36 mx-auto">
+                <p class="font-semibold text-gray-800">{{ tiger_card }}</p>
+            </div>
+        </div>
+        <p class="text-gray-700 mb-4">Winner: <strong class="font-semibold">{{ result }}</strong></p>
+        <p class="text-center text-lg font-bold mb-4 {% if is_win %}text-green-600{% else %}text-red-600{% endif %}">
+            {% if is_win %}
+                🎉 You Won!
+            {% else %}
+                😞 You Lost.
+            {% endif %}
+        </p>
+        <div class="text-center">
+            <a href="{% url 'play_dragon_tiger' %}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                Play Again
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Tiger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% load static %}
+</head>
+<body class="bg-white-900 text-white flex items-center justify-center min-h-screen">
+    <body class="bg-green-900 text-black flex items-center justify-center min-h-screen">
+        <h1 class="text-xl text-black font-semibold mb-8 absolute top-4 left-4">Welcome, {{ request.user.username }} 🎉</h1>
+    <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full text-center">
+        <h1 class="text-3xl font-bold mb-6">🎴 Dragon Tiger Game</h1>
+        <form method="post">
+            {% csrf_token %}
+            <p class="mb-4 text-lg font-semibold">Place your bet:</p>
+            <div class="flex justify-around mb-6 animate-spin-in">
+                <!-- Dragon Card -->
+                <div class="relative group">
+                    <label class="block cursor-pointer">
+                        <input type="radio" name="bet" value="dragon" class="hidden">
+                        <div class="w-40 h-56 bg-cover bg-center rounded-2xl shadow-xl border-4 border-blue-300 
+                                    flex items-end justify-center text-white text-xl font-bold transition-transform duration-300 group-hover:scale-110"
+                             style="background-image: url('/static/images/AdobeStock_700749367_Preview.jpeg');">
+                            <div class="bg-black bg-opacity-50 w-full text-center py-2 rounded-b-2xl">🐉 Dragon</div>
+                        </div>
+                    </label>
+                    <audio class="hover-sound" src="/static/sounds/dragon-quick-roar-mammel-94666.mp3"></audio>
+                </div>
+         
+            <script>
+                document.querySelectorAll('.group').forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        const audio = card.querySelector('.hover-sound');
+                        if (audio) {
+                            audio.currentTime = 0;
+                            audio.play();
+                        }
+                    });
+                });
+            </script>
+
+                <!-- Tie Card -->
+                <div class="relative group">
+                    <label class="block cursor-pointer">
+                        <input type="radio" name="bet" value="tie" class="hidden">
+                        <div class="w-40 h-56 bg-gradient-to-br from-gray-600 to-gray-800 text-white rounded-2xl shadow-xl border-4 border-gray-300 
+                                    flex items-center justify-center text-2xl font-bold transition-transform duration-300 group-hover:scale-110">
+                                    
+                            ⚖️ Tie
+                        </div>
+                    </label>
+                </div>
+
+                  <!-- Tiger Card -->
+                  <div class="relative group">
+                    <label class="block cursor-pointer">
+                        <input type="radio" name="bet" value="tiger" class="hidden">
+                        <div class="w-40 h-56 bg-gradient-to-br from-red-600 to-red-800 text-white rounded-2xl shadow-xl border-4 border-red-300 
+                                    flex items-center justify-center text-2xl font-bold transition-transform duration-300 group-hover:scale-110">
+                                    
+                            🐯 Tiger
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <style>
+                @keyframes spin-in {
+                    from {
+                        opacity: 0;
+                        transform: scale(0.5) rotate(-180deg);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: scale(1) rotate(0deg);
+                    }
+                }
+
+                .animate-spin-in {
+                    animation: spin-in 1s ease-out;
+                }
+            </style>
+            <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded">
+                Deal Cards
+            </button>
+        </form>
+    </div>
+</body>
+</html>
